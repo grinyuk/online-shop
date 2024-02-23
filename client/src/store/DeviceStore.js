@@ -6,17 +6,24 @@ export default class DeviceStore {
             {id: 1, name: 'Холодильники'},
             {id: 2, name: 'Смартфони'},
             {id: 3, name: 'Ноутбуки'},
+            {id: 4, name: 'Телевізори'},
         ]
         this._brands = [
             {id: 1, name: 'Samsung'},
-            {id: 2, name: 'Lenovo'},
+            {id: 2, name: 'Apple'},
+            {id: 3, name: 'Lenovo'},
+            {id: 4, name: 'Asus'},
         ]
         this._devices = [
             {id: 1, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
             {id: 2, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
             {id: 3, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
-            {id: 4, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'}
+            {id: 4, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
+            {id: 5, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
+            {id: 6, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'}
         ]
+        this._selectedType = {};
+        this._selectedBrand = {};
         makeAutoObservable(this);
     }
 
@@ -32,6 +39,14 @@ export default class DeviceStore {
         this._devices = devices;
     }
 
+    setSelectedType(type) {
+        this._selectedType = type;
+    }
+
+    setSelectedBrand(brand) {
+        this._selectedBrand = brand;
+    }
+
     get types() {
         return this._types;
     }
@@ -42,5 +57,13 @@ export default class DeviceStore {
 
     get devices() {
         return this._devices;
+    }
+
+    get selectedType() {
+        return this._selectedType;
+    }
+
+    get selectedBrand() {
+        return this._selectedBrand;
     }
 }
