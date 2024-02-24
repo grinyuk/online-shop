@@ -10,6 +10,11 @@ const NavBar = () => {
     const {user} = useContext(Context);
     const navigate = useNavigate();
 
+    const logOut = () => {
+        user.setUser({});
+        user.setIsAuth(false);
+    }
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -25,7 +30,7 @@ const NavBar = () => {
                         <Button
                             variant={"outline-light"}
                             className="ms-2"
-                            onClick={() => navigate(LOGIN_ROUTE)}
+                            onClick={() => logOut()}
                         >
                             Sing out
                         </Button>
@@ -33,8 +38,7 @@ const NavBar = () => {
                     :
                     <Nav className="ms-auto" style={{color: 'white'}}>
                         <Button variant={"outline-light"} onClick={() => {
-                            user.setIsAuth(true);
-                            console.log(user.isAuth)
+                            navigate(LOGIN_ROUTE)
                         }}>Authorize</Button>
                     </Nav>
                 }

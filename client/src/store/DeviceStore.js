@@ -1,29 +1,15 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 
 export default class DeviceStore {
     constructor() {
-        this._types = [
-            {id: 1, name: 'Холодильники'},
-            {id: 2, name: 'Смартфони'},
-            {id: 3, name: 'Ноутбуки'},
-            {id: 4, name: 'Телевізори'},
-        ]
-        this._brands = [
-            {id: 1, name: 'Samsung'},
-            {id: 2, name: 'Apple'},
-            {id: 3, name: 'Lenovo'},
-            {id: 4, name: 'Asus'},
-        ]
-        this._devices = [
-            {id: 1, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
-            {id: 2, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
-            {id: 3, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
-            {id: 4, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
-            {id: 5, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'},
-            {id: 6, name: 'Iphone 12 pro', price: 100000, rating: 5, img: 'https://img.jabko.ua/image/cache/catalog/products/2021/05/041936/IMG_4457-1397x1397.jpg'}
-        ]
+        this._types = [];
+        this._brands = [];
+        this._devices = [];
         this._selectedType = {};
         this._selectedBrand = {};
+        this._page = 1;
+        this._totalCount = 0;
+        this._limit = 3;
         makeAutoObservable(this);
     }
 
@@ -47,6 +33,14 @@ export default class DeviceStore {
         this._selectedBrand = brand;
     }
 
+    setPage(page) {
+        this._page = page;
+    }
+
+    setTotalCount(count) {
+        this._totalCount = count;
+    }
+
     get types() {
         return this._types;
     }
@@ -60,10 +54,28 @@ export default class DeviceStore {
     }
 
     get selectedType() {
+        runInAction(() => {
+            this.setPage(1);
+        })
         return this._selectedType;
     }
 
     get selectedBrand() {
+        runInAction(() => {
+            this.setPage(1);
+        })
         return this._selectedBrand;
+    }
+
+    get totalCount() {
+        return this._totalCount
+    }
+
+    get page() {
+        return this._page
+    }
+
+    get limit() {
+        return this._limit
     }
 }
